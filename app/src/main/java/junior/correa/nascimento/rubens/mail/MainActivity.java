@@ -33,22 +33,35 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Obtendo dados digitados pelo usuario
+
+                // Obtendo elemento onde o usuário digitou o e-mail
                 EditText etEmail = findViewById(R.id.etEmail);
                 String email = etEmail.getText().toString();
 
+                // Obtendo elemento onde o usuário digitou o assunto
                 EditText etAssunto = findViewById(R.id.etAssunto);
                 String assunto = etAssunto.getText().toString();
 
+                // Obtendo elemento onde o usuário digitou o conteúdo o e-mail
                 EditText etTexto = findViewById(R.id.etTexto);
                 String texto = etTexto.getText().toString();
 
+                // Cria uma intenção de enviar algo
                 Intent i = new Intent(Intent.ACTION_SENDTO);
 
+                // Especifica que é ncessário ser um aplicativo de e-mail
                 i.setData(Uri.parse("mailto:"));
 
+                // É necessário criar uma lista de strings contendo o email passado, já que o parâmetro só aceita lista
                 String[] emails = new String[]{email};
+
+                /* Essa é a forma que o professor indicou de como passar atributos de uma tela pra outro */
+
+                // Aqui é especificado, no objeto da Intent, o endereço de email a qual será encaminhado o e-mail
                 i.putExtra(Intent.EXTRA_EMAIL, emails);
+                // Aqui é especificado, no objeto da Intent, o assunto do email
                 i.putExtra(Intent.EXTRA_SUBJECT, assunto);
+                // Aqui é especificado, no objeto da Intent, o conteúdo do email
                 i.putExtra(Intent.EXTRA_TEXT, texto);
 
                 try {
