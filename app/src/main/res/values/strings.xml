@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">mail</string>
+    <string name="field_email">Email</string>
+    <string name="field_assunto">Assunto</string>
+    <string name="field_content">Texto</string>
+    <string name="button_send_text">Enviar</string>
 </resources>

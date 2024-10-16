@@ -4,7 +4,6 @@ import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -27,51 +26,48 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        Button btnEnviar = (Button) findViewById(R.id.btnEnviar);
+        Button btnEnviar = findViewById(R.id.btnEnviar);
         // Definicao da acao do click do botao
-        btnEnviar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Obtendo dados digitados pelo usuario
+        btnEnviar.setOnClickListener(v -> {
+            // Obtendo dados digitados pelo usuario
 
-                // Obtendo elemento onde o usuário digitou o e-mail
-                EditText etEmail = findViewById(R.id.etEmail);
-                String email = etEmail.getText().toString();
+            // Obtendo elemento onde o usuário digitou o e-mail
+            EditText etEmail = findViewById(R.id.etEmail);
+            String email = etEmail.getText().toString();
 
-                // Obtendo elemento onde o usuário digitou o assunto
-                EditText etAssunto = findViewById(R.id.etAssunto);
-                String assunto = etAssunto.getText().toString();
+            // Obtendo elemento onde o usuário digitou o assunto
+            EditText etAssunto = findViewById(R.id.etAssunto);
+            String assunto = etAssunto.getText().toString();
 
-                // Obtendo elemento onde o usuário digitou o conteúdo o e-mail
-                EditText etTexto = findViewById(R.id.etTexto);
-                String texto = etTexto.getText().toString();
+            // Obtendo elemento onde o usuário digitou o conteúdo o e-mail
+            EditText etTexto = findViewById(R.id.etTexto);
+            String texto = etTexto.getText().toString();
 
-                // Cria uma intenção de enviar algo
-                Intent i = new Intent(Intent.ACTION_SENDTO);
+            // Cria uma intenção de enviar algo
+            Intent i = new Intent(Intent.ACTION_SENDTO);
 
-                // Especifica que é ncessário ser um aplicativo de e-mail
-                i.setData(Uri.parse("mailto:"));
+            // Especifica que é ncessário ser um aplicativo de e-mail
+            i.setData(Uri.parse("mailto:"));
 
-                // É necessário criar uma lista de strings contendo o email passado, já que o parâmetro só aceita lista
-                String[] emails = new String[]{email};
+            // É necessário criar uma lista de strings contendo o email passado, já que o parâmetro só aceita lista
+            String[] emails = new String[]{email};
 
-                /* Essa é a forma que o professor indicou de como passar atributos de uma tela pra outro */
+            /* Essa é a forma que o professor indicou de como passar atributos de uma tela pra outro */
 
-                // Aqui é especificado, no objeto da Intent, o endereço de email a qual será encaminhado o e-mail
-                i.putExtra(Intent.EXTRA_EMAIL, emails);
-                // Aqui é especificado, no objeto da Intent, o assunto do email
-                i.putExtra(Intent.EXTRA_SUBJECT, assunto);
-                // Aqui é especificado, no objeto da Intent, o conteúdo do email
-                i.putExtra(Intent.EXTRA_TEXT, texto);
+            // Aqui é especificado, no objeto da Intent, o endereço de email a qual será encaminhado o e-mail
+            i.putExtra(Intent.EXTRA_EMAIL, emails);
+            // Aqui é especificado, no objeto da Intent, o assunto do email
+            i.putExtra(Intent.EXTRA_SUBJECT, assunto);
+            // Aqui é especificado, no objeto da Intent, o conteúdo do email
+            i.putExtra(Intent.EXTRA_TEXT, texto);
 
-                try {
-                    startActivity(Intent.createChooser(i, "Escolha o APP"));
-                }
-                catch (ActivityNotFoundException e) {
-                    Toast.makeText(MainActivity.this, "Não há nenhum app que posso realizar essa operação", Toast.LENGTH_LONG).show();
-                }
-
+            try {
+                startActivity(Intent.createChooser(i, "Escolha o APP"));
             }
+            catch (ActivityNotFoundException e) {
+                Toast.makeText(MainActivity.this, "Não há nenhum app que posso realizar essa operação", Toast.LENGTH_LONG).show();
+            }
+
         });
     }
 }
